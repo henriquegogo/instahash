@@ -38,10 +38,12 @@
     </body>
     <script>
         self.photos_list = {{list|safe}};
+        var refreshRate = {{duration|safe}} || 5000;
+        var text = {{text|safe}} + '';
         var i = 0;
-        var refreshRate = 5000;
         var hash_name = document.getElementById('hashname');
         hash_name.innerHTML = location.pathname.replace('/','#');
+        if (text) hash_name.innerHTML = text;
 
         function callDelay(callback, ms) {
             setTimeout(function() {
