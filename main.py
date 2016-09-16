@@ -16,9 +16,10 @@ def favicon():
 @app.route("/<hashtag>")
 def hashtag(hashtag):
     text = request.args.get('text') or ''
-    print(text)
     duration = int(request.args.get('duration')) * 1000 if request.args.get('duration') else 5000
     url = 'https://www.instagram.com/explore/tags/{}/'.format(hashtag)
+    customization = request.args.get('customization') or ''
+
     response_body = requests.get(url).text
     match = re.search('>window._sharedData = (.*);<', response_body)
     json_string = match.group(1)
@@ -28,7 +29,7 @@ def hashtag(hashtag):
     photos_list = map(lambda item: { 'src': item['display_src'], 'text': item['caption'] }, timeline_nodes)
     photos_list_json = json.dumps(photos_list)
 
-    return render_template('show.html', list=photos_list_json, text=text, duration=duration)
+    return render_template('show.html', list=photos_list_json, text=text, duration=duration, customization=customization)
 
 if __name__ == "__main__":
     app.run()

@@ -15,16 +15,33 @@
             <label>Hashtag
                 <input type="text"
                     required
+                    placeholder="no spaces or accents"
                     pattern="^\w+$"
                     onchange="this.form.action = this.value;"
                     onkeyup="this.form.text.placeholder = '#' + this.value">
             </label>
             <label>Duration
-                <input type="number" name="duration">
+                <input type="number" name="duration" placeholder="secs">
             </label>
             <label>Text
                 <input type="text" id="text" name="text">
             </label>
+
+            <details>
+                <summary>Advanced</summary>
+                <label>CSS Style<br>
+                    <textarea name="customization" style="width: 335px; height: 220px" placeholder="#caption {
+    font-family: sans-serif;
+    background: rgba(0,0,0,0.5);
+    color: #FFF;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    font-size: 4em;
+    text-shadow: 1px 1px 10px #000;
+}"></textarea>
+                </label>
+            </details>
             <input type="submit">
         </form>
     </body>
