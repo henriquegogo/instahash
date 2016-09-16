@@ -6,31 +6,103 @@
         <title>InstaHash</title>
 
         <style>
-            label { display: block }
+            body {
+                font-family: Helvetica, sans-serif;
+                overflow-x: hidden;
+                background: #141414;
+                padding: 50px 0 80px 0;
+                color: #FFFFFF;
+                width: 620px;
+                margin: 0 auto;
+            }
+            
+            h1 {
+                color: #ae5cc8;
+                text-transform: uppercase;
+            }
+
+            p {
+                font-size: 46px;
+                font-weight: bold;
+                margin-top: 60px;
+            }
+
+            input, textarea {
+                font-size: 20px;
+                font-family: Helvetica,sans-serif;
+                border-radius: 3px;
+                border: none;
+                outline: none;
+                width: 410px;
+                padding: 19px 20px;
+                margin: 0 15px 15px 0;
+                background: #E6E6E6;
+                color: #333;
+                border: solid 2px transparent;
+            }
+
+            input[type="submit"] {
+                width: 190px;
+                padding: 20px 20px;
+                background: #ae5cc8;
+                color: #FFFFFF;
+                cursor: pointer;
+            }
+
+            summary {
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+
+            #hashtag {
+                color: #ae5cc8;
+                width: 500px;
+                display: inline-block;
+                padding: 0 0 13px;
+                background: transparent;
+                font-size: 46px;
+                font-weight: bold;
+                border-radius: 0;
+                border-bottom: 10px dotted #ae5cc8;
+                border-left: 0; border-right: 0;
+            }
+
+            #text {
+                width: 264px;
+            }
+
+            #duration {
+                width: 130px;
+            }
+
+            #customization {
+                width: 460px;
+                height: 250px;
+            }
         </style>
     </head>
     <body>
         <h1>InstaHash</h1>
         <form id="config" method="get" action="">
-            <label>Hashtag
-                <input type="text"
-                    required
-                    placeholder="no spaces or accents"
-                    pattern="^\w+$"
-                    onchange="this.form.action = this.value;"
-                    onkeyup="this.form.text.placeholder = '#' + this.value">
-            </label>
-            <label>Duration
-                <input type="number" name="duration" placeholder="secs">
-            </label>
-            <label>Text
-                <input type="text" id="text" name="text">
-            </label>
+            <p>
+                You can show a set of pictures from Instagram just filling the form below:
+            </p>
+            <input type="text"
+                id="hashtag"
+                required
+                placeholder="hashtag"
+                pattern="^\w+$"
+                onchange="this.form.action = this.value"
+                onkeyup="this.form.text.placeholder = '#' + this.value;
+                         this.value = this.value.replace(/[#\ ]/g,'')">
+
+            <input type="text" id="text" name="text" placeholder="caption">
+            <input type="number" id="duration" name="duration" placeholder="time in secs">
 
             <details>
                 <summary>Advanced</summary>
                 <label>CSS Style<br>
-                    <textarea name="customization" style="width: 335px; height: 220px" placeholder="#caption {
+                    <textarea id="customization" name="customization" placeholder="#caption {
     font-family: sans-serif;
     background: rgba(0,0,0,0.5);
     color: #FFF;
