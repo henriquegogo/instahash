@@ -52,7 +52,7 @@
                 callback();
                 i++;
                 if (i < photos_list.length) callDelay(callback, refreshRate);
-                else location.reload();
+                else setTimeout(function() { location.reload(); }, (ms/3)*2);
             }, ms);
         }
 
