@@ -6,58 +6,27 @@
         <title>InstaHash</title>
 
         <style>
-            html, body {
-                position: relative;
-                display: block;
-                margin: 0;
-                padding: 0;
-                height: 100%;
-                overflow: none;
-            }
-            body {
-                background-color: #000;
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center center;
-            }
-            #hashname {
-                font-family: sans-serif;
-                background: rgba(0,0,0,0.5);
-                color: #FFF;
-                font-weight: bold;
-                text-align: center;
-                padding: 10px;
-                font-size: 4em;
-                text-shadow: 1px 1px 10px #000;
-            }
+            label { display: block }
         </style>
     </head>
     <body>
-        <div id="hashname"></div>
-        <img id="preloader" src="" style="display: none" />
+        <h1>InstaHash</h1>
+        <form id="config" method="get" action="">
+            <label>Hashtag
+                <input type="text"
+                    required
+                    pattern="^\w+$"
+                    onchange="this.form.action = this.value;"
+                    onkeyup="this.form.text.placeholder = '#' + this.value">
+            </label>
+            <label>Duration
+                <input type="number" name="duration">
+            </label>
+            <label>Text
+                <input type="text" id="text" name="text">
+            </label>
+            <input type="submit">
+        </form>
     </body>
-    <script>
-        self.photos_list = {{list|safe}};
-        var refreshRate = {{duration|safe}} || 5000;
-        var text = {{text|safe}} + '';
-        var i = 0;
-        var hash_name = document.getElementById('hashname');
-        hash_name.innerHTML = location.pathname.replace('/','#');
-        if (text) hash_name.innerHTML = text;
-
-        function callDelay(callback, ms) {
-            setTimeout(function() {
-                callback();
-                i++;
-                if (i < photos_list.length) callDelay(callback, refreshRate);
-                else location.reload();
-            }, ms);
-        }
-
-        callDelay(function() {
-            document.body.style.backgroundImage = 'url('+photos_list[i].src+')';
-            document.getElementById('preloader').src = photos_list[i+1] ? photos_list[i+1].src : '';
-        }, 0);
-    </script>
 </html>
 

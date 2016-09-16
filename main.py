@@ -16,17 +16,19 @@ def favicon():
 @app.route("/<hashtag>")
 def hashtag(hashtag):
     text = request.args.get('text') or ''
-    duration = request.args.get('duration') or 5000
+    print(text)
+    duration = int(request.args.get('duration')) * 1000 if request.args.get('duration') else 5000
     url = 'https://www.instagram.com/explore/tags/{}/'.format(hashtag)
     response_body = requests.get(url).text
     match = re.search('>window._sharedData = (.*);<', response_body)
     json_string = match.group(1)
     timeline_object = json.loads(json_string)
     timeline_nodes = timeline_object['entry_data']['TagPage'][0]['tag']['media']['nodes']
+    timeline_nodes = filter(lambda item: item['is_video'] == False, timeline_nodes)
     photos_list = map(lambda item: { 'src': item['display_src'], 'text': item['caption'] }, timeline_nodes)
     photos_list_json = json.dumps(photos_list)
 
-    return render_template('index.html', list=photos_list_json, text=text, duration=duration)
+    return render_template('show.html', list=photos_list_json, text=text, duration=duration)
 
 if __name__ == "__main__":
     app.run()
