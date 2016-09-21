@@ -17,6 +17,7 @@ def favicon():
 def hashtag(hashtag):
     text = request.args.get('text') or ''
     duration = int(request.args.get('duration')) * 1000 if request.args.get('duration') else 5000
+    startdate = int(request.args.get('startdate') or 0)
     url = 'https://www.instagram.com/explore/tags/{}/'.format(hashtag)
     customization = request.args.get('customization') or ''
 
@@ -25,7 +26,7 @@ def hashtag(hashtag):
     json_string = match.group(1)
     timeline_object = json.loads(json_string)
     timeline_nodes = timeline_object['entry_data']['TagPage'][0]['tag']['media']['nodes']
-    timeline_nodes = filter(lambda item: item['is_video'] == False, timeline_nodes)
+    timeline_nodes = filter(lambda item: item['is_video'] == False and int(item['date']) > startdate, timeline_nodes)
     photos_list = map(lambda item: { 'src': item['display_src'], 'text': item['caption'] }, timeline_nodes)
     photos_list_json = json.dumps(photos_list)
 

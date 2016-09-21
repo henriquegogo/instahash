@@ -28,6 +28,10 @@
                 margin-top: 60px;
             }
 
+            label {
+                display: block;
+            }
+
             input, textarea {
                 font-size: 20px;
                 font-family: Helvetica,sans-serif;
@@ -50,7 +54,12 @@
                 cursor: pointer;
             }
 
+            details {
+                display: block;
+            }
+
             summary {
+                display: block;
                 font-size: 22px;
                 margin-bottom: 10px;
             }
@@ -76,6 +85,10 @@
                 width: 130px;
             }
 
+            #date {
+                width: 200px;
+            }
+
             #customization {
                 width: 460px;
                 height: 250px;
@@ -99,7 +112,12 @@
 
             <input type="text" id="text" name="text" placeholder="caption">
             <input type="number" id="duration" name="duration" placeholder="time in secs">
+            <label for="date">Start date</label>
+            <input type="hidden" name="startdate"> 
+            <input type="date" id="date"
+                onchange="this.form.startdate.value = +(new Date(this.value)) / 1000">
 
+            <br>
             <details>
                 <summary>Advanced</summary>
                 <label>CSS Style<br>
