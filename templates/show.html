@@ -68,7 +68,6 @@
         }
 
         callDelay(function() {
-            //document.body.style.backgroundImage = 'url('+photos_list[i].src+')';
             document.getElementById('picture').style.backgroundImage = 'url('+photos_list[i].src+')';
             document.getElementById('preloader').src = photos_list[i+1] ? photos_list[i+1].src : '';
         }, 0);
