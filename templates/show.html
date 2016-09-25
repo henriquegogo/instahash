@@ -12,16 +12,13 @@
                 margin: 0;
                 padding: 0;
                 height: 100%;
+                background-color: #000;
                 overflow: none;
             }
-            body {
-                background-color: #000;
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center center;
-                transition: background 0.3s;
-            }
             #caption {
+                position: fixed;
+                left: 0;
+                right: 0;
                 font-family: sans-serif;
                 background: rgba(0,0,0,0.5);
                 color: #FFF;
@@ -30,12 +27,26 @@
                 padding: 10px;
                 font-size: 4em;
                 text-shadow: 1px 1px 10px #000;
+                z-index: 1;
+            }
+            #picture {
+                position: fixed;
+                top: 0; bottom: 0;
+                left: 0; right: 0;
+                background-color: #000;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                -webkit-transition: background-image 0.3s;
+                -moz-transition: background-image 0.3s;
+                transition: background-image 0.3s;
             }
             {{customization|safe}}
         </style>
     </head>
     <body>
         <div id="caption"></div>
+        <div id="picture"></div>
         <img id="preloader" src="" style="display: none" />
     </body>
     <script>
@@ -57,7 +68,8 @@
         }
 
         callDelay(function() {
-            document.body.style.backgroundImage = 'url('+photos_list[i].src+')';
+            //document.body.style.backgroundImage = 'url('+photos_list[i].src+')';
+            document.getElementById('picture').style.backgroundImage = 'url('+photos_list[i].src+')';
             document.getElementById('preloader').src = photos_list[i+1] ? photos_list[i+1].src : '';
         }, 0);
     </script>
