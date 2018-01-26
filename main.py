@@ -25,7 +25,7 @@ def hashtag(hashtag):
     match = re.search('>window._sharedData = (.*);<', response_body)
     json_string = match.group(1)
     timeline_object = json.loads(json_string)
-    timeline_nodes = timeline_object['entry_data']['TagPage'][0]['tag']['media']['nodes']
+    timeline_nodes = timeline_object['entry_data']['FeedPage'][0]['graphql']['user']['edge_web_feed_timeline']['edges']
     timeline_nodes = filter(lambda item: item['is_video'] == False and int(item['date']) > startdate, timeline_nodes)
     photos_list = map(lambda item: { 'src': item['display_src'], 'text': item['caption'] }, timeline_nodes)
     photos_list_json = json.dumps(photos_list)
